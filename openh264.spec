@@ -10,7 +10,7 @@ URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
 Version:      	1.5.0
-Release:        2%{?gver}%{dist}
+Release:        3%{?gver}%{dist}
 Source0:	%{name}-%{version}-%{snapshot}.tar.xz
 Source1: 	%{name}-snapshot.sh
 Source2:	https://github.com/mozilla/gmp-api/archive/master.zip
@@ -55,13 +55,25 @@ mv gmp-api-master gmp-api
 
 %build
 
-make %{_smp_mflags} PREFIX=/usr
+# Update the makefile with our build options
+sed -i -e 's|^CFLAGS_OPT=.*$|CFLAGS_OPT=%{optflags}|' Makefile
+sed -i -e 's|^PREFIX=.*$|PREFIX=%{_prefix}|' Makefile
+sed -i -e 's|^LIBDIR_NAME=.*$|LIBDIR_NAME=%{_lib}|' Makefile
+sed -i -e 's|^SHAREDLIB_DIR=.*$|SHAREDLIB_DIR=%{_libdir}|' Makefile
+sed -i -e '/^CFLAGS_OPT=/i LDFLAGS=%{__global_ldflags}' Makefile
+
+%ifarch x86_64 
+arch=x86_64
+%else
+arch=i386
+%endif
+make %{?_smp_mflags} ARCH=$arch
 
 # build mozilla plugin
 make plugin %{?_smp_mflags}
 
 %install
-%make_install PREFIX=/usr
+%make_install 
 %ifarch x86_64
 sed -i 's|${prefix}/lib|${prefix}/lib64|g' %{buildroot}/%{_libdir}/pkgconfig/openh264.pc
 %endif
@@ -117,6 +129,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+
+* Fri Jul 08 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 1.5.0-3-20160606-2610ab1
+- Massive rebuild
 
 * Tue Apr 19 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 1.5.0-2-20160606-2610ab1
 - Enabled mozilla-openh264
