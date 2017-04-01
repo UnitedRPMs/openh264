@@ -1,20 +1,19 @@
-# globals for openh264-1.5.0-20160606-2610ab1.tar.xz
-%global gitdate 20160606
-%global gitversion 2610ab1
-%global snapshot %{gitdate}-%{gitversion}
-%global gver .%{gitdate}git%{gitversion}
+# globals for openh264-1.6.0-20170331-69a8b3c.tar.xz
+%global gitdate 20170331
+%global commit0 69a8b3c3ea627f9e680cb34a9793b3a83171860d
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global gver .%{gitdate}git%{shortcommit0}
 
 Name:         	openh264
 Summary:      	Open Source H.264 Codec
 URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
-Version:      	1.5.0
-Release:        3%{?gver}%{dist}
-Source0:	%{name}-%{version}-%{snapshot}.tar.xz
+Version:      	1.6.0
+Release:        1%{?gver}%{dist}
+Source0: 	https://github.com/cisco/openh264/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: 	%{name}-snapshot.sh
 Source2:	https://github.com/mozilla/gmp-api/archive/master.zip
-Patch:		fix_path.patch
 BuildRequires: 	nasm git unzip
 
 %description
@@ -38,13 +37,7 @@ The mozilla-openh264 package contains a H.264 codec plugin for Mozilla
 browsers.
 
 %prep
-%setup -n openh264
-
-%ifarch x86_64
-%patch -p0
-%else
-sed -i 's/PREFIX=\/usr\/local/PREFIX=\/usr/g' Makefile
-%endif
+%autosetup -n openh264-%{commit0} 
 
 #------------------------|
 # Api for mozilla plugin
@@ -129,6 +122,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+
+* Fri Mar 31 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 1.6.0-1-20170331git69a8b3c
+- Updated to 1.6.0-1-20170331git69a8b3c
 
 * Fri Jul 08 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 1.5.0-3-20160606-2610ab1
 - Massive rebuild
