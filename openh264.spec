@@ -1,15 +1,13 @@
-# globals for openh264-1.6.0-20170331-69a8b3c.tar.xz
-%global gitdate 20170331
-%global commit0 69a8b3c3ea627f9e680cb34a9793b3a83171860d
+%global commit0 a180c9d4d6f1a4830ca9eed9d159d54996bd63cb
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global gver .%{gitdate}git%{shortcommit0}
+%global gver .git%{shortcommit0}
 
 Name:         	openh264
 Summary:      	Open Source H.264 Codec
 URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
-Version:      	1.6.0
+Version:      	1.7.0
 Release:        1%{?gver}%{dist}
 Source0: 	https://github.com/cisco/openh264/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1: 	%{name}-snapshot.sh
@@ -123,14 +121,17 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 
 %changelog
 
-* Fri Mar 31 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 1.6.0-1-20170331git69a8b3c
-- Updated to 1.6.0-1-20170331git69a8b3c
+* Tue Sep 05 2017 David Vásquez <davidva AT tutanota DOT com> - 1.7.0-1-gita180c9d
+- Updated to 1.7.0-1-gita180c9d
 
-* Fri Jul 08 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 1.5.0-3-20160606-2610ab1
+* Fri Mar 31 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 1.6.0-1-git69a8b3c
+- Updated to 1.6.0-1-git69a8b3c
+
+* Fri Jul 08 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 1.5.0-3-git2610ab1
 - Massive rebuild
 
-* Tue Apr 19 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 1.5.0-2-20160606-2610ab1
+* Tue Apr 19 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 1.5.0-2-git2610ab1
 - Enabled mozilla-openh264
 
-* Tue Apr 19 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 1.5.0-2-20160419-2610ab1
+* Tue Apr 19 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 1.5.0-2-git2610ab1
 - Initial build rpm
