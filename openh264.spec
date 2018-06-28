@@ -1,4 +1,4 @@
-%global commit0 a180c9d4d6f1a4830ca9eed9d159d54996bd63cb
+%global commit0 6fe15a6b82d492bebe388c55b7ee5131208e7334
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -7,10 +7,9 @@ Summary:      	Open Source H.264 Codec
 URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
-Version:      	1.7.0
+Version:      	1.8.0
 Release:        1%{?gver}%{dist}
 Source0: 	https://github.com/cisco/openh264/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1: 	%{name}-snapshot.sh
 Source2:	https://github.com/mozilla/gmp-api/archive/master.zip
 BuildRequires: 	nasm git unzip
 
@@ -120,6 +119,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+
+* Thu Jun 28 2018 David Va <davidva AT tuta DOT io> - 1.8.0-1-git6fe15a6
+- Updated to 1.8.0-1-git6fe15a6
 
 * Tue Sep 05 2017 David Vásquez <davidva AT tutanota DOT com> - 1.7.0-1-gita180c9d
 - Updated to 1.7.0-1-gita180c9d
