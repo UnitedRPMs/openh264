@@ -1,4 +1,4 @@
-%global commit0 6fe15a6b82d492bebe388c55b7ee5131208e7334
+%global commit0 71374015cdf13f7aab4bc2d820f77905b3becfb8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -7,11 +7,12 @@ Summary:      	Open Source H.264 Codec
 URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
-Version:      	1.8.0
+Version:      	2.0.0
 Release:        1%{?gver}%{dist}
 Source0: 	https://github.com/cisco/openh264/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2:	https://github.com/mozilla/gmp-api/archive/master.zip
 BuildRequires: 	nasm git unzip
+BuildRequires:	gcc-c++
 
 %description
 OpenH264 is a codec library which supports H.264 encoding and decoding.
@@ -119,6 +120,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+
+* Tue Jun 25 2019 David Va <davidva AT tuta DOT io> - 2.0.0-1-git6fe15a6
+- Updated to 2.0.0-1-git7137401
 
 * Thu Jun 28 2018 David Va <davidva AT tuta DOT io> - 1.8.0-1-git6fe15a6
 - Updated to 1.8.0-1-git6fe15a6
