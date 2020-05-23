@@ -1,4 +1,4 @@
-%global commit0 a60e28efe227ea8ea760b1e29a8943e371ebe4b3
+%global commit0 50a1fcf70fafe962c526749991cb4646406933ba
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -7,8 +7,8 @@ Summary:      	Open Source H.264 Codec
 URL:          	http://www.openh264.org/
 Group:        	System/Libraries
 License:      	BSD
-Version:      	2.1.0
-Release:        1%{?gver}%{dist}
+Version:      	2.1.1
+Release:        7%{?gver}%{dist}
 Source0: 	https://github.com/cisco/openh264/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source2:	https://github.com/mozilla/gmp-api/archive/master.zip
 BuildRequires:	nasm git unzip
@@ -120,6 +120,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/*.a
 %{_libdir}/mozilla/plugins/gmp-gmpopenh264/
 
 %changelog
+
+* Fri May 22 2020 David Va <davidva AT tuta DOT io> - 2.1.1-7-git50a1fcf
+- Updated to 2.1.1-7-git50a1fcf
 
 * Tue Mar 24 2020 David Va <davidva AT tuta DOT io> - 2.1.0-1-gita60e28e
 - Updated to 2.1.0-1-gita60e28e
